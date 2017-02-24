@@ -3,38 +3,38 @@
 
 using namespace std;
 
-vector<int> insertSort(vector<int> unsortArray) {
-	for(int i = 1; i<unsortArray.size(); i++) {
+void insertSort(vector<int>& unsortArray) 
+{
+	for(int i = 1; i<unsortArray.size(); i++) 
+	{
 		int temp = unsortArray[i];
-		for(int j = i-1; j >= 0; j--) {
-			if(temp < unsortArray[j] && 0 == j) {
-				unsortArray[j+1] = unsortArray[j];
-				unsortArray[j] = temp;
-			} 
-			else if(temp < unsortArray[j]) {
-				unsortArray[j+1] = unsortArray[j];
-			} 
-			else if(temp >= unsortArray[j]) {
-				unsortArray[j+1] = temp;
-				break;
-			}
+		int j = i-1;
+		while (j>=0 && temp < unsortArray[j]) 
+		{
+			unsortArray[j+1] = unsortArray[j];
+			j--;
 		}
+		unsortArray[j+1] = temp;
 	}
-	return unsortArray;
 }
 
-int _tmain(int argc, _TCHAR* argv[])
+int main()
 {
 	vector<int> unsortArray;
-	for(int i = 0; i<10; i++) {
+	for(int i = 0; i<10; i++) 
+	{
 		unsortArray.push_back(rand()%10);
 	}
-	for(vector<int>::iterator it = unsortArray.begin(); it != unsortArray.end(); it++) {
+	cout << "unsorted array: ";
+	for(vector<int>::iterator it = unsortArray.begin(); it != unsortArray.end(); it++) 
+	{
 		cout << *it << "  " ;
 	}
 	cout << endl;
-	unsortArray = insertSort(unsortArray);
-	for(vector<int>::iterator it = unsortArray.begin(); it != unsortArray.end(); it++) {
+	insertSort(unsortArray);
+	cout << "sorted array";
+	for(vector<int>::iterator it = unsortArray.begin(); it != unsortArray.end(); it++) 
+	{
 		cout << *it  << "  ";
 	}
 	cout << endl;
