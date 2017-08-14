@@ -14,6 +14,7 @@ void quickSort(int * array, int left, int right)
 
 	while (i <= j)
 	{
+		// 选取数组第一个元素作为参照
 		while (array[left] > array[i]) ++i;
 		while (array[left] < array[j]) --j;
 		
