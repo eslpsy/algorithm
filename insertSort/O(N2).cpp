@@ -39,7 +39,7 @@ int main()
 	}
 	cout << endl;
 
-	system("pause");
+	getchar();
 
 	return 0;
 }

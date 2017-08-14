@@ -83,6 +83,8 @@ int main()
 	{
 		Print();
 	}
-	system("pause");
+	
+	getchar();
+
 	return 0;
 }

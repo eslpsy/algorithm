@@ -6,6 +6,7 @@ inline int left(int);
 inline int right(int);
 void maxHeapSort(int*, int, int);
 void swap(int*, int, int);
+
 int main()
 {
 	int a[9] = { 9, 2, 3, 5, 6, 1, 4, 8, 7 };
@@ -25,7 +26,7 @@ int main()
 	}
 	cout << endl;
 
-	system("pause");
+	getchar();
 
     return 0;
 }
