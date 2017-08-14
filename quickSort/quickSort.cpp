@@ -26,7 +26,7 @@ void quickSort(int * array, int left, int right)
 		}
 	}
 
-	// recurtion
+	// recursion
 	if (left < j) quickSort(array, left, j);
 	if (right > i) quickSort(array, i, right);
 }
