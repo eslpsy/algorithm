@@ -10,7 +10,7 @@ int BinarySearch(int array[], int left, int right, int target)
 
 	while (left <= right)
 	{
-		int mid = left + ((right - left) >> 1);
+		int mid = left + ((right - left) >> 1); // right + left可能会溢出，用减法更好
 		if (array[mid] > target)
 		{
 			right = mid - 1;
