@@ -5,7 +5,7 @@ public:
         vector<int> result;
         for (vector<int>::iterator it = nums.begin(); it != nums.end(); ++it)
         {
-			//使用了algorithm中的std::find方法，为二分查找
+			//使用了algorithm中的std::find方法，二分查找
             vector<int>::iterator find_result = find(it + 1, nums.end(), target - *it);
             if (find_result != nums.end())
             {
