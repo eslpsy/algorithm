@@ -1,0 +1,31 @@
+// 计算二叉树所有左叶子节点的和
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+ 
+public class Solution {
+    public int SumOfLeftLeaves(TreeNode root) {
+        if (null == root) return 0;
+        
+        int sum = 0;
+        leftNode(root, ref sum);	// ref 传递引用参数时，函数声明定义以及调用都要用ref
+        
+        return sum;
+    }
+    
+	// 先序遍历二叉树
+    private void leftNode(TreeNode node, ref int sum) {
+        if (node.left != null && null == node.left.left && null == node.left.right)	// 判断左叶子节点
+        {
+            sum += node.left.val;
+        }
+        if (node.left != null) this.leftNode(node.left, ref sum);
+        if (node.right != null) this.leftNode(node.right, ref sum);
+    }
+}
