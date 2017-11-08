@@ -7,17 +7,12 @@ public:
         int result = 0;
         for (auto s_it = s.begin(); s_it != s.end(); ++s_it)
         {
-            for(auto g_it = g.begin(); g_it != g.end();)
+            for(auto g_it = g.begin() + result; g_it != g.end(); ++g_it)
             {
                 if (*s_it >= *g_it)
                 {
-                    g_it = g.erase(g_it);
                     ++result;
                     break;   // 一个披萨最多只能喂一次
-                }
-                else
-                {
-                    ++g_it;
                 }
             }
         }
