@@ -7,7 +7,7 @@ return "blue is sky the".
 class Solution {
 public:
 	void reverseWords(string &s) {
-		vector<string> strArray;
+		vector<string> strArray;	// 按顺序记录s中的每一个单词
 
 		string str = "";
 		for (int i = 0; i < (int)s.length(); ++i)
@@ -28,7 +28,7 @@ public:
 		}
 
 		s = "";
-		for (auto it = strArray.rbegin(); it != strArray.rend(); ++it)
+		for (auto it = strArray.rbegin(); it != strArray.rend(); ++it)	// 将记录的单词逆序写入到s中
 		{
 			s += *it;
 			if (it != strArray.rend() - 1)
