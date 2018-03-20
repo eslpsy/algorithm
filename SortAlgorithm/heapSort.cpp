@@ -13,7 +13,7 @@ int main()
 	int heap_size = sizeof(a) / sizeof(a[0]);
 	while (heap_size >= 2)
 	{
-		for (int i = heap_size/2; i > 0; --i)
+		for (int i = heap_size/2 - 1; i >= 0; --i)
 		{
 			maxHeapSort(a, i, heap_size);
 		}
@@ -33,12 +33,12 @@ int main()
 
 inline int left(int i)
 {
-	return i << 1;
+	return (i << 1) + 1;
 }
 
 inline int right(int i)
 {
-	return (i << 1) + 1;
+	return (i << 1) + 2;
 }
 void swap(int* a, int i, int j)
 {
@@ -51,16 +51,16 @@ void maxHeapSort(int* a, int i, int heap_size)
 	int r = right(i);
 	int l = left(i);
 	int largest = i;
-	if (a[l-1] > a[i-1])
+	if (a[l] > a[i])
 	{
 		largest = l;
 	}
-	if (r <= heap_size && a[r-1] > a[largest-1])
+	if (r <= heap_size - 1 && a[r] > a[largest])
 	{
 		largest = r;
 	}
 	if (largest != i)
 	{
-		swap(a, largest-1, i-1);
+		swap(a, largest, i);
 	}
 }
