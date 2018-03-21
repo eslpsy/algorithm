@@ -2,89 +2,71 @@
 
 using namespace std;
 
-const int N = 100;
-
-int g_array[N];     //´æ·ÅÊäÈëµÄÊı×Ö
-
-//ºÏ²¢º¯Êı
-void Merge(int a[], int l, int m, int r)
+void merge(int *data, int start, int end, int middle, int *result)
 {
-	int i = l, j = m + 1, k = l;
-	int b[N];
-	while (i <= m && j <= r)
+	int left_index = start;
+	int right_index = middle;
+	int result_index = start;
+	while (left_index < middle && right_index < end + 1)
 	{
-		if (a[i] <= a[j])
-		{
-			b[k++] = a[i++];
-		}
+		if (data[left_index] <= data[right_index])
+			result[result_index++] = data[left_index++];
 		else
-		{
-			b[k++] = a[j++];
-		}
+			result[result_index++] = data[right_index++];
 	}
+	while (left_index < middle)
+		result[result_index++] = data[left_index++];
+	while (right_index < end + 1)
+		result[result_index++] = data[right_index++];
+}
 
-	if (i > m)
+void merge_sort(int *data, int start, int end, int *result)
+{
+	if (1 == end - start)//å¦‚æœåŒºé—´ä¸­åªæœ‰ä¸¤ä¸ªå…ƒç´ ï¼Œåˆ™å¯¹è¿™ä¸¤ä¸ªå…ƒç´ è¿›è¡Œæ’åº
 	{
-		for (int p = j; p <= r; p++)
+		if (data[start] > data[end])
 		{
-			b[k++] = a[p];
+			int temp = data[start];
+			data[start] = data[end];
+			data[end] = temp;
 		}
+		return;
 	}
+	else if (0 == end - start)//å¦‚æœåªæœ‰ä¸€ä¸ªå…ƒç´ ï¼Œåˆ™ä¸ç”¨æ’åº
+		return;
 	else
 	{
-		for (int p = i; p <= m; p++)
-		{
-			b[k++] = a[p];
-		}
+		//ç»§ç»­åˆ’åˆ†å­åŒºé—´ï¼Œåˆ†åˆ«å¯¹å·¦å³å­åŒºé—´è¿›è¡Œæ’åº
+		int middle = (end - start + 1) / 2 + start;
+		merge_sort(data, start, middle - 1, result);
+		merge_sort(data, middle, end, result);
+		//å¼€å§‹å½’å¹¶å·²ç»æ’å¥½åºçš„startåˆ°endä¹‹é—´çš„æ•°æ®
+		merge(data, start, end, middle, result);
 	}
-
-	//°Ñb[]ÖĞÅÅºÃµÄÔªËØcopyµ½a[]ÖĞ
-	for (int q = l; q <= r; q++)
-	{
-		a[q] = b[q];
-	}
-}
-
-//  ¹é²¢ÅÅĞò µİ¹éËã·¨±íÊ¾
-void MergeSort(int a[], int left, int right)
-{
-	if (left < right)    //Êı×éÖÁÉÙÒªÓĞÁ½¸öÔªËØ
-	{
-		int i = (right + left) / 2;
-		MergeSort(a, left, i);
-		MergeSort(a, i + 1, right);
-		Merge(a, left, i, right); //°Ñleftµ½rightµÄÔªËØÅÅĞòºÃ
-	}
-}
-
-//´òÓ¡ÅÅºÃĞòµÄÊı×é
-void Print()
-{
-	cout << "¾­¹ıMergeSortºó£º";
-	for (int i = 0; i < N; i++)
-	{
-		cout << g_array[i] << " ";
-	}
-	cout << endl;
 }
 
 int main()
 {
-	for (int i = 0; i < N; ++i)
+	const static int ARR_SIZE = 6;
+	int arr[ARR_SIZE]{ 1, 3, 4, 2, 6, 5 };
+
+	for (int &i : arr)
 	{
-		g_array[i] = rand() % 100;
+		cout << i << " ";
 	}
-	if (N > 1)
+	cout << endl;
+
+	int* result = new int[ARR_SIZE];
+
+	merge_sort(arr, 0, ARR_SIZE - 1, result);
+
+	for (int i = 0; i < ARR_SIZE; ++i)
 	{
-		MergeSort(g_array, 0, N - 1);
-		Print();
+		cout << result[i] << " ";
 	}
-	else if (N == 1)
-	{
-		Print();
-	}
-	
-	getchar();
+	cout << endl;
+
+	delete[] result;
 
 	return 0;
 }
